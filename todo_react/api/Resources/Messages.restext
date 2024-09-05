@@ -1,0 +1,3 @@
+﻿Todo_List_Required=List is required
+Todo_Description_Required=Description is required
+Todo_DueDate_InPast=Due date cannot be in the past
