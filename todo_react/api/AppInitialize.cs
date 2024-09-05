@@ -22,9 +22,12 @@ namespace TodoApi
             _logger.LogInformation("Checking to ensure azure table exists.");
             using(var scope = _scopeFactory.CreateScope())
             {
-                IRepositoryInitializer repositoryInitializer = 
-                    scope.ServiceProvider.GetRequiredService<IRepositoryInitializer>();
-                await repositoryInitializer.EnsureCreatedAsync();
+                var repositoryInitializers = 
+                    scope.ServiceProvider.GetServices<IRepositoryInitializer>();
+                foreach (var repositoryInitializer in repositoryInitializers)
+                {
+                    await repositoryInitializer.EnsureCreatedAsync();
+                }
             }
             _logger.LogInformation("Azure tables all exist.");
         }

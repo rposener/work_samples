@@ -15,8 +15,10 @@ builder.Services
     .SwaggerDocument();
 
 // Add Services
+builder.Services.AddScoped<IIdentityManager, IdentityManager>();
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 builder.Services.AddScoped<IRepositoryInitializer, TodoRepository>();
+builder.Services.AddScoped<IRepositoryInitializer, IdentityManager>();
 
 // Add Initializer
 builder.Services.AddHostedService<AppInitialize>();
