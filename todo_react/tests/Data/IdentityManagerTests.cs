@@ -1,12 +1,7 @@
-﻿using Azure.Data.Tables;
-using Azure;
+﻿using Azure;
+using Azure.Data.Tables;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TodoApi.Data;
 
 namespace TodoApiTests.Data

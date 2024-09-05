@@ -1,9 +1,7 @@
 ﻿using Azure;
-using Azure.Core;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System.ComponentModel.DataAnnotations;
 using TodoApi.Data;
 
 namespace TodoApiTests.Data
