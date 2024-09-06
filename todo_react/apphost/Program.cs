@@ -16,8 +16,15 @@ if (builder.Environment.IsDevelopment())
 }
 var table = storage.AddTables("tables");
 
-builder.AddProject<Projects.TodoApi>("todoapi")
+var todoapi = builder.AddProject<Projects.TodoApi>("todoapi")
     .WithExternalHttpEndpoints()
     .WithReference(table);
+
+builder.AddNpmApp("webapp", "../reactapp", "dev")
+    .WithReference(todoapi)
+    .WithEnvironment("BROWSER", "none") // Disable opening browser on npm start
+    .WithEndpoint(5174,5173,"https", "frontend","PORT")
+    .WithExternalHttpEndpoints()
+    .PublishAsDockerFile();
 
 builder.Build().Run();

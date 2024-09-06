@@ -9,12 +9,12 @@ namespace TodoApi.Features.Todo.Get
 
         public override void Configure()
         {
-            Get("/todos/{TodoList}");
+            Get("/todos/{todoList}");
             AllowAnonymous();
-            //Description(b => b.WithTags("Todos"));
+            Description(b => b.WithTags("Todos"));
             Summary(s =>
             {
-                s.Params["todoList"] = "Todo List to retrieve";
+                s.Params["TodoList"] = "Todo List to retrieve";
                 //s.RequestParam(p => p.TodoList, "Todo List to Retrieve");
             });
         }
