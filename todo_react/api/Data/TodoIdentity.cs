@@ -3,6 +3,9 @@ using Azure.Data.Tables;
 
 namespace TodoApi.Data
 {
+    /// <summary>
+    /// Provides NextId Identity Generation Peristance for each Todo List (aka PartitionKey)
+    /// </summary>
     public class TodoIdentity : ITableEntity
     {
         /// <summary>

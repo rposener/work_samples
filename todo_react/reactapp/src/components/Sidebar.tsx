@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useGetTodoLists } from '../api/todoQueries';
 
 interface Props {
     selectedList: string,
@@ -7,13 +7,15 @@ interface Props {
 
 function Sidebar(props: Props) {
     const { selectedList, selectList } = props
-    const [todoLists, setTodoLists] = useState(["list 1", "list 2", "list 3"]);
+    const {data: todoLists} = useGetTodoLists();
 
+    const render = todoLists ?? [];
+ 
     return (
         <nav>
             <ol role="list" className='divide-y divide-gray-400'>
                 <li className="from-neutral-500 font-bold text-center">Lists Available</li>
-                {todoLists.map((list) =>
+                {render.map((list) =>
                     selectedList === list ? (
                         <li key={list} className="text-white font cursor-pointer bg-gray-600 ps-2" 
                         onClick={() => selectList(list)}>{list}</li>

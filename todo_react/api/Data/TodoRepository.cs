@@ -121,5 +121,25 @@ namespace TodoApi.Data
             _logger.LogInformation("Returned {todo_count} for {todoList} todo list.", result.Count, todoList);
             return result;
         }
+
+        /// <summary>
+        /// Returns a list of all Todo Lists
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IList<string>> GetTodoListsAsync()
+        {
+            List<string> lists = new();
+            var client = _tableServiceClient.GetTableClient(Todo_TableName);
+            var pages = client.QueryAsync<TableEntity>(select:["PartitionKey"]);
+            await foreach (var todo in pages)
+            {
+                if (string.IsNullOrEmpty(todo.PartitionKey))
+                    continue;
+
+                if (!lists.Contains(todo.PartitionKey))
+                    lists.Add(todo.PartitionKey);
+            }
+            return lists;
+        }
     }
 }

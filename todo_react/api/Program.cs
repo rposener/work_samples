@@ -23,8 +23,23 @@ builder.Services.AddScoped<IRepositoryInitializer, IdentityManager>();
 // Add Initializer
 builder.Services.AddHostedService<AppInitialize>();
 
-var app = builder.Build();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: "DevCors",
+                          policy =>
+                          {
+                              policy.WithOrigins("https://localhost:5174");
+                          });
+    });
+}
 
+var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("DevCors");
+}
 app.UseFastEndpoints()
     .UseSwaggerGen();
 

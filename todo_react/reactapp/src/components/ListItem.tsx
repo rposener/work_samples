@@ -1,6 +1,10 @@
-function ListItem() {
+interface ListItemParams {
+  todo: TodoItem
+}
+
+function ListItem({todo}: ListItemParams) {
   return (
-    <div>ListItem</div>
+    <div className="border border-black rounded-sm">{todo.description}</div>
   )
 }
 export default ListItem
