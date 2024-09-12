@@ -30,7 +30,7 @@ export const useAddTodo = () => {
     const queryClient = useQueryClient();
     return useMutation<NewTodoResponse, AxiosError<ApiProblem>, NewTodo>({
         mutationFn: async (newTodo) => {
-            const post = await client.post<NewTodoResponse>('/todos', newTodo);
+            const post = await client.post<NewTodoResponse>(`/todos`, newTodo);
             return post.data;
         },
         onSettled: async () => {

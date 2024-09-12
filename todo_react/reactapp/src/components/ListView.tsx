@@ -19,7 +19,7 @@ function ListView(props: Props) {
             {todoItems?.map((item) => (
                 <ListItem todo={item} key={item.id}/>
             ))}
-            <AddListItem/>
+            <AddListItem selectedList={selectedList}/>
             </div>
         </div>
     )

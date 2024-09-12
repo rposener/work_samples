@@ -27,10 +27,12 @@ if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy(name: "DevCors",
-                          policy =>
+        options.AddDefaultPolicy(policy =>
                           {
                               policy.WithOrigins("https://localhost:5174");
+                              policy.AllowAnyHeader();
+                              policy.AllowAnyMethod();
+                              policy.AllowCredentials();
                           });
     });
 }
@@ -38,7 +40,7 @@ if (builder.Environment.IsDevelopment())
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors("DevCors");
+    app.UseCors();
 }
 app.UseFastEndpoints()
     .UseSwaggerGen();
