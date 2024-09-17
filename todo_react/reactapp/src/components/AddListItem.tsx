@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from "react";
+import { useState } from "react";
 import { useAddTodo } from "../api/todoQueries"
 
 interface AddListItemProps {
@@ -24,7 +24,7 @@ function AddListItem({selectedList}: AddListItemProps) {
   return (
     <div className="border border-black rounded-sm">
       <form className="flex flex-row" onSubmit={addTodo}>
-        <input type="text" name="description" value={description} onChange={e => setDescription(e.target.value)} className="w-full mr-2" placeholder="type a new item..." />
+              <input type="text" name="description" value={description} onChange={e => setDescription(e.target.value)} className="w-full mr-2" autoComplete="false" aria-autocomplete="none" placeholder="type a new item..." />
         <button className="border-blue-900 border px-2 bg-blue-400 from-neutral-50 font-bold" type="submit">Save</button>
         </form>
     </div>

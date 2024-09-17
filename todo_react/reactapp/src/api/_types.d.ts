@@ -25,3 +25,7 @@ type TodoItem = {
     reminderDays?: number,
     idCompleted?: boolean
 }
+
+type TodoItemWithList = TodoItem & {
+    todoList: string;
+}

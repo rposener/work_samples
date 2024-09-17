@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Sidebar from './components/Sidebar';
 import ListView from './components/ListView';
-import AddList from './components/AddList';
+import AddList from "./components/AddList";
 
 function App() {
   const [selectedList, selectList] = useState("");
@@ -14,7 +14,7 @@ function App() {
         </div>
         <div className="basis-3/4">
           {(selectedList !== "") && (<ListView selectedList={selectedList}/>)}
-          {(selectedList === "") && (<AddList />)}
+                  {(selectedList === "") && (<AddList selectList={selectList} />)}
         </div>
       </div>
     </>

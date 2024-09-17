@@ -38,3 +38,16 @@ export const useAddTodo = () => {
         }
     });
 }
+
+export const useUpdateTodo = () => {
+    const queryClient = useQueryClient();
+    return useMutation<TodoItem, AxiosError<ApiProblem>, TodoItemWithList>({
+        mutationFn: async (todo) => {
+            const post = await client.post<TodoItem>(`/todos/${todo.todoList}`, todo);
+            return post.data;
+        },
+        onSettled: async () => {
+            await queryClient.invalidateQueries({ queryKey: ["todo"] });
+        }
+    });
+}
