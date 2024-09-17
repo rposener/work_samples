@@ -1,0 +1,94 @@
+﻿@page "/userlist"
+
+<style>
+    dialog {
+        border: solid 1px #ccc;
+        padding: 20px;
+        border-radius: 5px;
+    }
+</style>
+
+
+<h3>User List</h3>
+<input list="users" placeholder="select a user..." />
+<datalist id="users">
+    @foreach (var user in Users)
+    {
+        <option value="@user.FirstName @user.LastName" />
+    }
+</datalist>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var user in Users)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Total Users: @Users.Count()</td>
+        </tr>
+    </tfoot>
+</table>
+<button id="openDialog">Add User Form</button>
+
+
+<dialog id="formDialog">
+    <form id="userForm" method="dialog">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <button type="submit">Submit</button>
+        <button type="button" id="closeDialog">Cancel</button>
+    </form>
+</dialog>
+
+@code {
+    [Inject]
+    private IUserRepository repository { get; set; }
+
+    [Inject]
+    private IJSRuntime JS { get; set; }
+
+    private IEnumerable<User> Users;
+
+    protected override void OnInitialized()
+    {
+        Users = repository.GetUsers();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("initializeDialog");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> OnPostSubmit([FromBody] User user)
+    {
+        if (user != null)
+        {
+            repository.CreateUser(user);
+            return new JsonResult(new { success = true, message = "User added successfully" });
+        }
+        return new JsonResult(new { success = false, message = "Invalid user data" });
+    }
+}
