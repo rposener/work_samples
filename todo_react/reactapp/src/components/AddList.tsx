@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useAddTodo } from "../api/todoQueries";
 
 interface AddListProps {
-    setState: React.Dispatch<React.SetStateAction<string>>
+    selectList: React.Dispatch<React.SetStateAction<string>>
 }
-function AddList({ setState }: AddListProps) {
+function AddList({ selectList }: AddListProps) {
     const [todoList, setTodoList] = useState("");
     const [description, setDescription] = useState("");
     const addTodoMutation = useAddTodo();
@@ -16,7 +16,7 @@ function AddList({ setState }: AddListProps) {
             description
         }, {
             onSuccess: () => {
-                setState(todoList);
+                selectList(todoList);
                 setDescription("");
             }
         })

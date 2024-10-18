@@ -61,6 +61,11 @@
         <button type="button" id="closeDialog">Cancel</button>
     </form>
 </dialog>
+<script>
+    setTimeout(function () {
+        initializeDialog();
+    }, 100);
+</script>
 
 @code {
     [Inject]
@@ -74,11 +79,7 @@
     protected override void OnInitialized()
     {
         Users = repository.GetUsers();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JS.InvokeVoidAsync("initializeDialog");
+        JS.InvokeVoidAsync("initializeDialog");
     }
 
     [HttpPost]

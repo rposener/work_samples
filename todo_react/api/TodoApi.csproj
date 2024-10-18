@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Azure.Data.Tables" Version="8.2.0" />
-    <PackageReference Include="FastEndpoints" Version="5.29.0" />
-    <PackageReference Include="FastEndpoints.Swagger" Version="5.29.0" />
+    <PackageReference Include="Aspire.Azure.Data.Tables" Version="8.2.1" />
+    <PackageReference Include="FastEndpoints" Version="5.30.0" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.30.0" />
   </ItemGroup>
 
   <ItemGroup>

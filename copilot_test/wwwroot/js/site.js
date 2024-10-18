@@ -1,4 +1,4 @@
-﻿window.initializeDialog = function () {
+﻿const initializeDialog = function () {
     const openDialogButton = document.getElementById('openDialog');
     const formDialog = document.getElementById('formDialog');
     const closeDialogButton = document.getElementById('closeDialog');
@@ -37,3 +37,10 @@
         }
     });
 }
+
+window.onpopstate = function (event) {
+    console.log(
+        "location: " + document.location + ", state: " + JSON.stringify(event.state)
+    );
+    initializeDialog();
+};
